@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,14 +24,13 @@ import task.shopify.www.shopifytask.model.Products;
 public class MainActivity extends AppCompatActivity implements Callback<Products>{
 
     @BindView(R.id.tv_total_cost)TextView mTvTotalCost;
+    @BindView(R.id.progress_bar)ProgressBar mProgressBar;
 
     private Context mContext = MainActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        requestWindowFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -38,8 +38,7 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
 
     @OnClick(R.id.btn_fetch_data)
     public void fetchData(View view){
-        setProgressBarIndeterminateVisibility(true);
-        setProgressBarVisibility(true);
+        mProgressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Config.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -52,13 +51,14 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
 
     @Override
     public void onResponse(Call<Products> call, Response<Products> response) {
-        //setProgressBarIndeterminateVisibility(false);
+        mProgressBar.setVisibility(View.GONE);
         Log.d("Result", "Code: "+response.code()+" \n"+response.body().toString());
 
     }
 
     @Override
     public void onFailure(Call<Products> call, Throwable t) {
+        mProgressBar.setVisibility(View.GONE);
         Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
     }
 }
