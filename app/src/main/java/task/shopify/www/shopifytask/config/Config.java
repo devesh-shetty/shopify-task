@@ -14,4 +14,7 @@ public class Config {
     public static final String PRODUCT_TYPE_CLOCK = "Clock";
     public static final String PRODUCT_TYPE_WATCH = "Watch";
 
+    public static final int UNICODE_CLOCK = 0x23F0;
+    public static final int UNICODE_WATCH = 0x231A;
+
 }

@@ -19,28 +19,19 @@
             android:textSize="@dimen/textview_info_text_size"
             android:text="@string/info_message_total_cost"
             android:padding="@dimen/textview_info_padding"
+            android:gravity="center"
             />
-
-        <Button
-            android:id="@+id/btn_fetch_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fetch data"
-            />
-        <Spinner
-            android:id="@+id/spinner_page_no"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></Spinner>
 
         <GridView
             android:id="@+id/gridView_images"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="2"
+            android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
             android:gravity="center"
-            android:verticalSpacing="4dp"
+            android:verticalSpacing="2dp"
             android:horizontalSpacing="2dp"
+            android:animateLayoutChanges="true"
             ></GridView>
 
 
