@@ -1,13 +1,13 @@
 package task.shopify.www.shopifytask.model;
 
-/**
- * Created by deveshshetty on 10/09/16.
- */
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Devesh Shetty
+ */
 public class Option {
 
     private String name;

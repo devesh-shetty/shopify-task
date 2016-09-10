@@ -1,11 +1,8 @@
 package task.shopify.www.shopifytask.model;
 
 /**
- * Created by deveshshetty on 10/09/16.
+ * @author Devesh Shetty
  */
-import java.util.HashMap;
-import java.util.Map;
-
 public class Variant {
 
     private long id;

@@ -28,6 +28,18 @@
             android:text="Fetch data"
             />
 
+        <GridView
+            android:id="@+id/gridView_images"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+            android:verticalSpacing="4dp"
+            android:horizontalSpacing="2dp"
+            ></GridView>
+
+
     </LinearLayout>
 
     <ProgressBar

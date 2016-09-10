@@ -1,13 +1,12 @@
 package task.shopify.www.shopifytask.model;
 
-/**
- * Created by deveshshetty on 10/09/16.
- */
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * The POJO containing details related to a product
+ * @author Devesh Shetty
+ */
 public class Product {
 
     private long id;

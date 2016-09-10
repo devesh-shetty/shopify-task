@@ -1,12 +1,11 @@
 package task.shopify.www.shopifytask.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Created by deveshshetty on 10/09/16.
+ * The POJO containing details related to Image of a product
+ * @author Devesh Shetty
  */
 public class Image {
 
