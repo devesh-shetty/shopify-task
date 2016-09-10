@@ -16,4 +16,11 @@
         android:padding="@dimen/textview_info_padding"
         />
 
+    <Button
+        android:id="@+id/btn_fetch_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fetch data"
+        />
+
 </LinearLayout>
