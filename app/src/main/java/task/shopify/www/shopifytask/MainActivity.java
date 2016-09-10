@@ -3,9 +3,14 @@ package task.shopify.www.shopifytask;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,15 +41,37 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
     @BindView(R.id.tv_total_cost)TextView mTvTotalCost;
     @BindView(R.id.progress_bar)ProgressBar mProgressBar;
     @BindView(R.id.gridView_images)GridView mGridView;
+    @BindView(R.id.spinner_page_no)Spinner mSpinner;
 
     private ImageAdapter mImageAdapter;
     private Context mContext = MainActivity.this;
+    private int mCurrentPageNo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(mContext,
+                                                            R.array.page_numbers, android.R.layout.simple_spinner_item);
+
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(arrayAdapter);
+
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mCurrentPageNo = Integer.parseInt(parent.getItemAtPosition(position)+"");
+                fetchData(null);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 
@@ -58,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
 
         //prepare the call
         ShopifyTaskAPI shopifyTaskAPI = retrofit.create(ShopifyTaskAPI.class);
-        Call<Products> call = shopifyTaskAPI.loadData(3);
+        Call<Products> call = shopifyTaskAPI.loadData(mCurrentPageNo);
         //make an asynchronous call
         call.enqueue(this);
     }

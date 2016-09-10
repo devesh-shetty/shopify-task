@@ -11,4 +11,7 @@ public class Config {
 
     public static final int STATUS_CODE_OK = 200;
 
+    public static final String PRODUCT_TYPE_CLOCK = "Clock";
+    public static final String PRODUCT_TYPE_WATCH = "Watch";
+
 }

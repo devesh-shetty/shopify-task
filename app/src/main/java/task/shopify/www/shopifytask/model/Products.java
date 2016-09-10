@@ -1,15 +1,20 @@
 package task.shopify.www.shopifytask.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by deveshshetty on 10/09/16.
+ * @author Devesh Shetty
  */
 public class Products {
 
+    @SerializedName("products")
+    @Expose
     private List<Product> products = new ArrayList<Product>();
 
     /**

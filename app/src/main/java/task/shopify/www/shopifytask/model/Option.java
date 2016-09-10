@@ -1,5 +1,8 @@
 package task.shopify.www.shopifytask.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,10 +13,18 @@ import java.util.Map;
  */
 public class Option {
 
+    @SerializedName("name")
+    @Expose
     private String name;
+
+    @SerializedName("position")
+    @Expose
     private long position;
+
+    @SerializedName("values")
+    @Expose
     private List<String> values = new ArrayList<String>();
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     /**
      *
@@ -75,7 +86,6 @@ public class Option {
                 "name='" + name + '\'' +
                 ", position=" + position +
                 ", values=" + values +
-                ", additionalProperties=" + additionalProperties +
                 '}';
     }
 }

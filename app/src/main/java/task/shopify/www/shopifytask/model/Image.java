@@ -1,5 +1,8 @@
 package task.shopify.www.shopifytask.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +12,32 @@ import java.util.List;
  */
 public class Image {
 
+    @SerializedName("id")
+    @Expose
     private long id;
+
+    @SerializedName("created_at")
+    @Expose
     private String createdAt;
+
+    @SerializedName("position")
+    @Expose
     private long position;
+
+    @SerializedName("updated_at")
+    @Expose
     private String updatedAt;
+
+    @SerializedName("product_id")
+    @Expose
     private long productId;
+
+    @SerializedName("variant_ids")
+    @Expose
     private List<Object> variantIds = new ArrayList<Object>();
+
+    @SerializedName("src")
+    @Expose
     private String src;
 
     /**

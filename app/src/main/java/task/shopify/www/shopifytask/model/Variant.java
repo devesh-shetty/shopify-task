@@ -1,26 +1,79 @@
 package task.shopify.www.shopifytask.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * @author Devesh Shetty
  */
 public class Variant {
 
+    @SerializedName("id")
+    @Expose
     private long id;
+
+    @SerializedName("title")
+    @Expose
     private String title;
+
+    @SerializedName("option1")
+    @Expose
     private String option1;
+
+    @SerializedName("option2")
+    @Expose
     private Object option2;
+
+    @SerializedName("option3")
+    @Expose
     private Object option3;
+
+    @SerializedName("sku")
+    @Expose
     private String sku;
+
+    @SerializedName("requires_shipping")
+    @Expose
     private boolean requiresShipping;
+
+    @SerializedName("taxable")
+    @Expose
     private boolean taxable;
+
+    @SerializedName("featured_image")
+    @Expose
     private Object featuredImage;
+
+    @SerializedName("available")
+    @Expose
     private boolean available;
+
+    @SerializedName("price")
+    @Expose
     private String price;
+
+    @SerializedName("grams")
+    @Expose
     private long grams;
+
+    @SerializedName("compare_at_price")
+    @Expose
     private Object compareAtPrice;
+
+    @SerializedName("position")
+    @Expose
     private long position;
+
+    @SerializedName("product_id")
+    @Expose
     private long productId;
+
+    @SerializedName("created_at")
+    @Expose
     private String createdAt;
+
+    @SerializedName("updated_at")
+    @Expose
     private String updatedAt;
 
     /**
