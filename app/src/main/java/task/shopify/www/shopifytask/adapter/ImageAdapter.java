@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -24,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import task.shopify.www.shopifytask.ItemDetailsActivity;
 import task.shopify.www.shopifytask.R;
+import task.shopify.www.shopifytask.config.Config;
 import task.shopify.www.shopifytask.model.Item;
 
 /**
@@ -73,11 +75,18 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         Item item = getItem(position);
+
+        if(Config.DEBUGGING_MODE){
+            Picasso.with(mContext).setIndicatorsEnabled(true);
+            Picasso.with(mContext).setLoggingEnabled(true);
+        }
+
         //load the imageView with the bitmap
         Picasso.with(mContext)
                 .load(item.getProductImageSrc())
                 .placeholder(R.drawable.progress_animation)
                 .into(viewHolder.ivProductImage);
+
 
         viewHolder.tvProductTitle.setText(item.getProductTitle());
         return convertView;
@@ -104,6 +113,8 @@ public class ImageAdapter extends BaseAdapter {
              ByteArrayOutputStream stream = new ByteArrayOutputStream();
              bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
              byte[] byteArray = stream.toByteArray();
+             //cleanup the cache
+             view.destroyDrawingCache();
 
              int[] screenLocation = new int[2];
              view.getLocationOnScreen(screenLocation);

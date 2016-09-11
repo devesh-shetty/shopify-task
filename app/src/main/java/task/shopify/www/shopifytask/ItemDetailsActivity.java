@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import task.shopify.www.shopifytask.config.Config;
 
 public class ItemDetailsActivity extends AppCompatActivity {
 
@@ -106,10 +107,11 @@ public class ItemDetailsActivity extends AppCompatActivity {
     /**
      * The enter animation scales the picture in from its previous thumbnail
      * size/location In parallel, the background of the
-     * activity is fading in.
+     * activity is fading in.When the picture is in place, the text description
+     * drops down.
      */
     public void runEnterAnimation() {
-        final long duration = (long) (ANIM_DURATION * 2);
+        final long duration = (long) (ANIM_DURATION * Config.ANIMATOR_SCALE);
 
         // Set starting values for properties we're going to animate. These
         // values scale and position the full size version down to the thumbnail
@@ -141,7 +143,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
                     }
                 });;
 
-        // Fade in the black background
+        // Fade in the  background
         ObjectAnimator bgAnim = ObjectAnimator.ofInt(mBackground, "alpha", 0, 255);
         bgAnim.setDuration(duration);
         bgAnim.start();
@@ -158,7 +160,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
      * when we actually switch activities)
      */
     public void runExitAnimation(final Runnable endAction) {
-        final long duration = (long) (ANIM_DURATION * 2);
+        final long duration = (long) (ANIM_DURATION * Config.ANIMATOR_SCALE);
 
         // No need to set initial values for the reverse animation; the image is at the
         // starting size/location that we want to start from. Just animate to the

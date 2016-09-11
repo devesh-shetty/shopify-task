@@ -25,7 +25,7 @@
         android:padding="3dp"
         android:textColor="#FFF"
         android:gravity="center"
-        android:textSize="15sp"
+        android:textSize="20sp"
 
         />
 

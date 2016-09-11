@@ -131,8 +131,11 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
                         for(Variant variant: variantList){
                             //check if the variant is available or not
                             if(variant.isAvailable()){
-                                BigDecimal price = new BigDecimal(variant.getPrice());
+                                String cost = variant.getPrice();
+                                Log.d(DEBUG_TAG, "Adding "+cost+" to "+mTotalCost);
+                                BigDecimal price = new BigDecimal(cost);
                                 mTotalCost = mTotalCost.add(price);
+                                Log.d(DEBUG_TAG, "Got "+mTotalCost);
                             }
 
                         }
