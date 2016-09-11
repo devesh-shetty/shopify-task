@@ -1,23 +1,15 @@
 package task.shopify.www.shopifytask;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.GridLayoutAnimationController;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -68,10 +60,6 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
         mImageAdapter = new ImageAdapter(mContext, mAdapterItems);
         mGridView.setAdapter(mImageAdapter);
 
-        //Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.item_anim);
-        //GridLayoutAnimationController animationController = new GridLayoutAnimationController(animation, 0.4f, 0.4f);
-        //mGridView.setLayoutAnimation(animationController);
-
         fetchData(mCurrentPageNo);
     }
 
@@ -82,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
     private void fetchData(int pageNo){
         mProgressBar.setVisibility(View.VISIBLE);
         Log.d(DEBUG_TAG,"Fetch request made for Page No: "+pageNo);
+        //Build a Retrofit with the url and use the GsonConvertor
         Retrofit retrofit = new Retrofit.Builder()
                                         .baseUrl(Config.BASE_URL)
                                         .addConverterFactory(GsonConverterFactory.create())
@@ -169,7 +158,8 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
     @Override
     public void onFailure(Call<Products> call, Throwable t) {
         mProgressBar.setVisibility(View.GONE);
-        Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        Log.d(DEBUG_TAG, t.getMessage());
+        Toast.makeText(mContext, "Please, check your internet connection.", Toast.LENGTH_LONG).show();
     }
 
 

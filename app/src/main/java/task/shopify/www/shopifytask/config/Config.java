@@ -17,8 +17,8 @@ public class Config {
     public static final int UNICODE_CLOCK = 0x23F0;
     public static final int UNICODE_WATCH = 0x231A;
 
-    public static final boolean DEBUGGING_MODE = true;
+    public static final boolean DEBUGGING_MODE = false;
 
-    public static final float ANIMATOR_SCALE = 0.5f;
+    public static final float ANIMATOR_SCALE = 1.3f;
 
 }
