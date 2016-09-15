@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
@@ -56,7 +57,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_details);
         ButterKnife.bind(this);
 
-        mBackground = new ColorDrawable(getResources().getColor(R.color.colorPrimary));
+        int color = ContextCompat.getColor(mContext, R.color.colorPrimary);
+        mBackground = new ColorDrawable(color);
         mParentLayout.setBackground(mBackground);
 
         Bundle bundle = getIntent().getExtras();
@@ -131,16 +133,14 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 scaleX(1).scaleY(1).
                 translationX(0).translationY(0).
                 setInterpolator(sDecelerator).
-                withEndAction(new Runnable() {
-                    public void run() {
-                        // Animate the description in after the image animation
-                        // is done. Slide and fade the text in from underneath
-                        // the picture.
-                        mTextViewTitle.setTranslationY(-mTextViewTitle.getHeight());
-                        mTextViewTitle.animate().setDuration(duration/2).
-                                translationY(0).alpha(1).
-                                setInterpolator(sDecelerator);
-                    }
+                withEndAction(() -> {
+                    // Animate the description in after the image animation
+                    // is done. Slide and fade the text in from underneath
+                    // the picture.
+                    mTextViewTitle.setTranslationY(-mTextViewTitle.getHeight());
+                    mTextViewTitle.animate().setDuration(duration/2).
+                            translationY(0).alpha(1).
+                            setInterpolator(sDecelerator);
                 });;
 
         // Fade in the  background
@@ -183,22 +183,20 @@ public class ItemDetailsActivity extends AppCompatActivity {
         // First, slide/fade text out of the way
         mTextViewTitle.animate().translationY(-mTextViewTitle.getHeight()).alpha(0).
                 setDuration(duration/2).setInterpolator(sAccelerator).
-                withEndAction(new Runnable() {
-                    public void run() {
-                        // Animate image back to thumbnail size/location
-                        mImageView.animate().setDuration(duration).
-                                scaleX(mWidthScale).scaleY(mHeightScale).
-                                translationX(mLeftDelta).translationY(mTopDelta).
-                                withEndAction(endAction);
-                        if (fadeOut) {
-                            mImageView.animate().alpha(0);
-                        }
-                        // Fade out background
-                        ObjectAnimator bgAnim = ObjectAnimator.ofInt(mBackground, "alpha", 0);
-                        bgAnim.setDuration(duration);
-                        bgAnim.start();
-
+                withEndAction(() -> {
+                    // Animate image back to thumbnail size/location
+                    mImageView.animate().setDuration(duration).
+                            scaleX(mWidthScale).scaleY(mHeightScale).
+                            translationX(mLeftDelta).translationY(mTopDelta).
+                            withEndAction(endAction);
+                    if (fadeOut) {
+                        mImageView.animate().alpha(0);
                     }
+                    // Fade out background
+                    ObjectAnimator bgAnim = ObjectAnimator.ofInt(mBackground, "alpha", 0);
+                    bgAnim.setDuration(duration);
+                    bgAnim.start();
+
                 });
 
 
@@ -211,12 +209,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
-        runExitAnimation(new Runnable() {
-            public void run() {
-                // *Now* go ahead and exit the activity
-                finish();
-            }
-        });
+        runExitAnimation(() -> finish());
     }
 
     @Override
