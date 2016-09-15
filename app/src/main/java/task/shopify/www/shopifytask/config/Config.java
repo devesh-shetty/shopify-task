@@ -19,6 +19,6 @@ public class Config {
 
     public static final boolean DEBUGGING_MODE = false;
 
-    public static final float ANIMATOR_SCALE = 1.3f;
+    public static final float ANIMATOR_SCALE = 2f;
 
 }

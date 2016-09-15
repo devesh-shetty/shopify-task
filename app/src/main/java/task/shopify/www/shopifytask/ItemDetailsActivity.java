@@ -3,22 +3,30 @@ package task.shopify.www.shopifytask;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +52,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
     @BindView(R.id.iv_selected_image)ImageView mImageView;
     @BindView(R.id.parentLayout)RelativeLayout mParentLayout;
     @BindView(R.id.tv_title)TextView mTextViewTitle;
+    @BindView(R.id.spinner_variants)Spinner mSpinnerVariants;
+    @BindView(R.id.tv_variant_cost)TextView mTextViewVariantCost;
 
     private int mOriginalOrientation;
     private BitmapDrawable mBitmapDrawable;
@@ -80,6 +90,33 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 .placeholder(R.drawable.progress_animation)
                 .into(mImageView);
 
+        //keys of the map consist of the variant's title
+        HashMap<String, String> mapVariants = (HashMap<String, String>) bundle.getSerializable(VARIANTS);
+        Set<String> variantSet =  mapVariants.keySet();
+        ArrayList list = new ArrayList();
+        list.addAll(variantSet);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, list);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinnerVariants.setAdapter(arrayAdapter);
+        mSpinnerVariants.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //get the variant
+                String key = (String) mSpinnerVariants.getItemAtPosition(position);
+                //get the price
+                String price = mapVariants.get(key);
+                NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.CANADA);
+                String res = numberFormat.format(new BigDecimal(price));
+                mTextViewVariantCost.setText(res);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         // Only run the animation if we're coming from the parent activity, not if
         // we're recreated automatically by the window manager (e.g., device rotation)
         if (savedInstanceState == null) {
@@ -110,6 +147,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
     }
 
+
     /**
      * The enter animation scales the picture in from its previous thumbnail
      * size/location In parallel, the background of the
@@ -131,6 +169,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
         // We'll fade the text in later
         mTextViewTitle.setAlpha(0);
+        mSpinnerVariants.setAlpha(0);
+        mTextViewVariantCost.setAlpha(0);
 
         // Animate scale and translation to go from thumbnail to full size
         mImageView.animate().setDuration(duration).
@@ -145,6 +185,18 @@ public class ItemDetailsActivity extends AppCompatActivity {
                     mTextViewTitle.animate().setDuration(duration/2).
                             translationY(0).alpha(1).
                             setInterpolator(sDecelerator);
+
+                    mSpinnerVariants.setTranslationX( mSpinnerVariants.getWidth());
+                    mSpinnerVariants.animate().setDuration(duration/2)
+                            .translationX(0).alpha(1)
+                            .setInterpolator(sDecelerator);
+
+                    mTextViewVariantCost.setTranslationY( mTextViewVariantCost.getHeight());
+                    mTextViewVariantCost.animate().setDuration(duration/2)
+                            .translationY(0).alpha(1)
+                            .setInterpolator(sDecelerator);
+
+
                 });;
 
         // Fade in the  background
@@ -200,6 +252,12 @@ public class ItemDetailsActivity extends AppCompatActivity {
                     ObjectAnimator bgAnim = ObjectAnimator.ofInt(mBackground, "alpha", 0);
                     bgAnim.setDuration(duration);
                     bgAnim.start();
+
+                    mTextViewVariantCost.animate().translationY( -mTextViewVariantCost.getHeight()).alpha(0)
+                                                    .setDuration(duration/2).setInterpolator(sAccelerator);
+                    mSpinnerVariants.animate().translationX(-mSpinnerVariants.getWidth()).alpha(0)
+                            .setDuration(duration/2).setInterpolator(sAccelerator);
+
 
                 });
 

@@ -1,5 +1,6 @@
 package task.shopify.www.shopifytask.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,20 +10,20 @@ public class Item {
 
     private String productTitle;
     private String productImageSrc;
-    private Map<String, String> variantMap;
+    private HashMap<String, String> variantMap;
 
 
-    public Item(String productTitle, String productImageSrc, Map<String, String> variantMap) {
+    public Item(String productTitle, String productImageSrc, HashMap<String, String> variantMap) {
         this.productTitle = productTitle;
         this.productImageSrc = productImageSrc;
         this.variantMap = variantMap;
     }
 
-    public Map<String, String> getVariantMap() {
+    public HashMap<String, String> getVariantMap() {
         return variantMap;
     }
 
-    public void setVariantMap(Map<String, String> variantMap) {
+    public void setVariantMap(HashMap<String, String> variantMap) {
         this.variantMap = variantMap;
     }
 

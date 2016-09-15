@@ -3,7 +3,6 @@ package task.shopify.www.shopifytask;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,14 +13,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -124,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
                        //add items to the list only if they are of type watch or clock
 
                         List<Variant> variantList = product.getVariants();
-                        Map<String, String> variantMap = new HashMap<>();
+                        HashMap<String, String> variantMap = new HashMap<>();
                         for(Variant variant: variantList){
                             //check if the variant is available or not
                             if(variant.isAvailable()){
@@ -170,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
     @Override
     public void onFailure(Call<Products> call, Throwable t) {
         mProgressBar.setVisibility(View.GONE);
-        Log.d(DEBUG_TAG, t.getMessage());
+        //Log.d(DEBUG_TAG, t.getMessage());
         Toast.makeText(mContext, "Please, check your internet connection.", Toast.LENGTH_LONG).show();
     }
 
@@ -182,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Item item = (Item) mGridView.getItemAtPosition(position);
             int[] screenLocation = new int[2];
+            //get the co-ordinates of the view on the screen
             view.getLocationOnScreen(screenLocation);
             Intent intent = new Intent(mContext, ItemDetailsActivity.class);
             int orientation = getResources().getConfiguration().orientation;
@@ -192,7 +190,8 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
                     .putExtra(ItemDetailsActivity.WIDTH, view.getWidth())
                     .putExtra(ItemDetailsActivity.HEIGHT, view.getHeight())
                     .putExtra(ItemDetailsActivity.IMAGE, item.getProductImageSrc())
-                    .putExtra(ItemDetailsActivity.TITLE, item.getProductTitle());
+                    .putExtra(ItemDetailsActivity.TITLE, item.getProductTitle())
+                    .putExtra(ItemDetailsActivity.VARIANTS, item.getVariantMap());
 
             mContext.startActivity(intent);
 

@@ -2,8 +2,6 @@ package task.shopify.www.shopifytask.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +11,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import task.shopify.www.shopifytask.ItemDetailsActivity;
 import task.shopify.www.shopifytask.R;
 import task.shopify.www.shopifytask.config.Config;
 import task.shopify.www.shopifytask.model.Item;
@@ -94,7 +90,6 @@ public class ImageAdapter extends BaseAdapter {
 
         public ViewHolder(View view){
             ButterKnife.bind(this, view);
-//            ivProductImage.setOnClickListener(this);
         }
 
 
