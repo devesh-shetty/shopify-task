@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import task.shopify.www.shopifytask.config.Config;
@@ -31,6 +33,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
     public static final String HEIGHT = "HEIGHT";
     public static final String TITLE = "TITLE";
     public static final String IMAGE = "IMAGE";
+    public static final String VARIANTS = "VARIANTS";
 
     private Context mContext = ItemDetailsActivity.this;
 
@@ -70,11 +73,12 @@ public class ItemDetailsActivity extends AppCompatActivity {
         String title = bundle.getString(TITLE);
         mTextViewTitle.setText(title);
 
-        byte[] byteArray = bundle.getByteArray(IMAGE);
-
-        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        mBitmapDrawable = new BitmapDrawable(getResources(), bitmap);
-        mImageView.setImageDrawable(mBitmapDrawable);
+        String imgSrc = bundle.getString(IMAGE);
+        //load the imageView with the bitmap
+        Picasso.with(mContext)
+                .load(imgSrc)
+                .placeholder(R.drawable.progress_animation)
+                .into(mImageView);
 
         // Only run the animation if we're coming from the parent activity, not if
         // we're recreated automatically by the window manager (e.g., device rotation)

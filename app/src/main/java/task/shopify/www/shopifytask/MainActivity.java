@@ -1,20 +1,27 @@
 package task.shopify.www.shopifytask;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
         mAdapterItems = new ArrayList<>();
         mImageAdapter = new ImageAdapter(mContext, mAdapterItems);
         mGridView.setAdapter(mImageAdapter);
-
+        mGridView.setOnItemClickListener(mOnItemClickListener);
         fetchData(mCurrentPageNo);
     }
 
@@ -117,14 +124,19 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
                        //add items to the list only if they are of type watch or clock
 
                         List<Variant> variantList = product.getVariants();
+                        Map<String, String> variantMap = new HashMap<>();
                         for(Variant variant: variantList){
                             //check if the variant is available or not
                             if(variant.isAvailable()){
                                 String cost = variant.getPrice();
-                                Log.d(DEBUG_TAG, "Adding "+cost+" to "+mTotalCost);
+                                String title = variant.getTitle();
+                                Log.d(DEBUG_TAG, "Adding "+cost+" of "+ title+  " to "+mTotalCost);
                                 BigDecimal price = new BigDecimal(cost);
                                 mTotalCost = mTotalCost.add(price);
                                 Log.d(DEBUG_TAG, "Got "+mTotalCost);
+
+                                variantMap.put(title, cost);
+
                             }
 
                         }
@@ -133,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
                         String productTitle = product.getTitle();
 
                         for(Image image : imageList){
-                            Item item = new Item(productTitle, image.getSrc());
+                            Item item = new Item(productTitle, image.getSrc(), variantMap);
                             mAdapterItems.add(item);
                         }
 
@@ -162,6 +174,34 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
         Toast.makeText(mContext, "Please, check your internet connection.", Toast.LENGTH_LONG).show();
     }
 
+    private AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
+        /**
+         * Pass the required info for animation to the next activity
+         */
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Item item = (Item) mGridView.getItemAtPosition(position);
+            int[] screenLocation = new int[2];
+            view.getLocationOnScreen(screenLocation);
+            Intent intent = new Intent(mContext, ItemDetailsActivity.class);
+            int orientation = getResources().getConfiguration().orientation;
+
+            intent.putExtra(ItemDetailsActivity.ORIENTATION, orientation)
+                    .putExtra(ItemDetailsActivity.LEFT_CO_ORDIANTE, screenLocation[0])
+                    .putExtra(ItemDetailsActivity.TOP_CO_ORDINATE, screenLocation[1])
+                    .putExtra(ItemDetailsActivity.WIDTH, view.getWidth())
+                    .putExtra(ItemDetailsActivity.HEIGHT, view.getHeight())
+                    .putExtra(ItemDetailsActivity.IMAGE, item.getProductImageSrc())
+                    .putExtra(ItemDetailsActivity.TITLE, item.getProductTitle());
+
+            mContext.startActivity(intent);
+
+            // Override transitions: we don't want the normal window animation in addition
+            // to our custom one
+            ((Activity)mContext).overridePendingTransition(0, 0);
+
+        }
+    };
 
 
 }
