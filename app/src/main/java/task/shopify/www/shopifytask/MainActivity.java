@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -34,6 +37,7 @@ import task.shopify.www.shopifytask.model.Item;
 import task.shopify.www.shopifytask.model.Product;
 import task.shopify.www.shopifytask.model.Products;
 import task.shopify.www.shopifytask.model.Variant;
+import task.shopify.www.shopifytask.proto.HackDaysActivity;
 import task.shopify.www.shopifytask.util.Util;
 
 /**
@@ -202,5 +206,30 @@ public class MainActivity extends AppCompatActivity implements Callback<Products
         }
     };
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_items, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Intent intent = null;
+        switch (id){
+            case R.id.hack_days:
+                intent = new Intent(mContext, HackDaysActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.about_me:
+                intent = new Intent(mContext, AboutMeActivity.class);
+                startActivity(intent);
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
+    }
 }

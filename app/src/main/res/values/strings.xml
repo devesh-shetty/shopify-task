@@ -1,4 +1,45 @@
 <resources>
     <string name="app_name">ShopifyTask</string>
     <string name="info_message_total_cost">Total Cost:</string>
+    <string name="title_activity_about_me">Devesh Shetty</string>
+
+
+    <string name="content_devesh_shetty">
+    "I\'m a Computer Engineering student at Xavier Institute of Engineering, Mumbai, India.\n\n"
+
+  "What do I do?\n\n"
+
+        "I code, recode, decode.\n"
+
+        "I watch Anime.\n"
+
+        "\t\t\t....Loading....\n\n\n"
+
+        "The list is HUGE!\n"
+
+        "I like to code in JAVA. I\'m currently exploring lambda expressions.\n\n"
+
+        "I like to try out new things.\n"
+
+        "I have developed Android Applications, Websites and soon will get into iOS Application Development."
+
+        "I am currently working on developing an Augmented Reality based Tetris game.\n\n"
+
+        "Augmented Reality is totally a new field for me.\n\n"
+
+        "My idea for Hack Days revolves around <b>Augmented Reality</b>. \n\n"
+
+        "Let\'s say, we are somehow able to encode the cart item data into a image pattern. My application will recognise that pattern and generate a 3d image of the item. In the prototype, I am making use of the pre-defined hiro pattern and generating a Cube
+        with all it\'s properties defined in it\'s class. I have used the ARToolkit framework for the prototype.\n\n"
+        "So, customers with the help of our companion application will be able to view the product in it\'s
+        fully glory (as a virtual object) and it will be a totally magical experience for them. They can interact
+        with the product in a way that\'s unique on its own. We can provide our customers with the facility to customise the product (like color,etc)
+        in real-time.\n\n"
+
+        <i>"With this technology, we won\'t just be redefining commerce, we will be bringing an experience to our customers that\'s going
+            to blow their minds.\n\n\n"</i>
+
+        </string>
+
+    <string name="action_settings">Settings</string>
 </resources>

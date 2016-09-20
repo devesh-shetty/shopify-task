@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/hack_days"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="Hack Days Prototype"
+        />
+
+    <item
+        android:id="@+id/about_me"
+        android:icon="@drawable/ic_account_circle_white_24dp"
+        android:title="About Me"/>
+
+</menu>

@@ -167,7 +167,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
         mImageView.setTranslationX(mLeftDelta);
         mImageView.setTranslationY(mTopDelta);
 
-        // We'll fade the text in later
+        // We'll fade them in later
         mTextViewTitle.setAlpha(0);
         mSpinnerVariants.setAlpha(0);
         mTextViewVariantCost.setAlpha(0);

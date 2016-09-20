@@ -21,4 +21,6 @@ public class Config {
 
     public static final float ANIMATOR_SCALE = 2f;
 
+    public static final String EMAIL_ID = "shetty.devesh.in@gmail.com";
+
 }
