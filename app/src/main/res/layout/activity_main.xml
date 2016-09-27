@@ -25,7 +25,7 @@
             android:id="@+id/gridView_images"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="auto_fit"
+            android:numColumns="1"
             android:stretchMode="columnWidth"
             android:gravity="center"
             android:verticalSpacing="1dp"

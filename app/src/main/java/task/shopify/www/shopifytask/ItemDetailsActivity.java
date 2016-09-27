@@ -70,7 +70,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_details);
         ButterKnife.bind(this);
 
-        int color = ContextCompat.getColor(mContext, R.color.colorPrimary);
+        int color = ContextCompat.getColor(mContext, R.color.colorPrimaryDark);
         mBackground = new ColorDrawable(color);
         mParentLayout.setBackground(mBackground);
 

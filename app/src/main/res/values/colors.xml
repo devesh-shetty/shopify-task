@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4CAF50</color>
-    <color name="colorPrimaryDark">#388E3C</color>
-    <color name="colorAccent">#8BC34A</color>
-    <color name="colorPrimaryLight">#C8E6C9</color>
-    <color name="colorPrimaryText">#212121</color>
-    <color name="colorSecondaryText">#757575</color>
-    <color name="colorIcons">#FFFFFF</color>
-    <color name="colorDivider">#BDBDBD</color>
+    <color name="colorPrimary">#2ecc71</color>
+    <color name="colorPrimaryDark">#27ae60</color>
+    <color name="colorAccent">#1abc9c</color>
+    <color name="colorPrimaryLight">#ecf0f1</color>
+    <color name="colorPrimaryText">#34495e</color>
+    <color name="colorSecondaryText">#2c3e50</color>
+    <color name="colorIcons">#bdc3c7</color>
+    <color name="colorDivider">#95a5a6</color>
     <color name="colorDarkTransparent">#55000000</color>
+
+
+    <!--<color name="colorPrimary">#4CAF50</color>-->
+    <!--<color name="colorPrimaryDark">#388E3C</color>-->
+    <!--<color name="colorAccent">#8BC34A</color>-->
+    <!--<color name="colorPrimaryLight">#C8E6C9</color>-->
+    <!--<color name="colorPrimaryText">#212121</color>-->
+    <!--<color name="colorSecondaryText">#757575</color>-->
+    <!--<color name="colorIcons">#FFFFFF</color>-->
+    <!--<color name="colorDivider">#BDBDBD</color>-->
+    <!--<color name="colorDarkTransparent">#55000000</color>-->
 </resources>
